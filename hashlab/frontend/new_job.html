@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="fr" data-theme="corporate">
+<head>
+  <meta charset="UTF-8" />
+  <title>Nouveau job – HashLab</title>
+  <link href="https://cdn.jsdelivr.net/npm/daisyui@4.6.0/dist/full.css" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-base-200">
+
+  <div class="navbar bg-base-100 shadow-md px-6">
+    <div class="flex-1">
+      <span class="text-xl font-bold tracking-wide cursor-pointer" onclick="goToDashboard()">HashLab</span>
+      <span class="badge badge-primary ml-3">Nouveau job</span>
+    </div>
+    <div class="flex-none">
+      <button class="btn btn-ghost btn-sm" onclick="goToDashboard()">Dashboard</button>
+    </div>
+  </div>
+
+  <div class="p-6 max-w-2xl mx-auto">
+    <h2 class="text-2xl font-semibold mb-4">Nouveau job de cracking</h2>
+
+    <!-- HASH -->
+    <div class="form-control mb-4">
+      <label class="label">
+        <span class="label-text">Hash à cracker</span>
+      </label>
+      <input id="hash" class="input input-bordered" placeholder="e10adc3949ba59abbe56e057f20f883e" />
+      <label class="label">
+        <span class="label-text-alt">Ex : MD5 de 123456 = e10adc3949ba59abbe56e057f20f883e</span>
+      </label>
+    </div>
+
+    <!-- ALGO (optionnel, backend peut deviner par longueur) -->
+    <div class="form-control mb-4">
+      <label class="label">
+        <span class="label-text">Algorithme (optionnel)</span>
+      </label>
+      <select id="algo" class="select select-bordered">
+        <option value="">Auto (détection par longueur)</option>
+        <option value="md5">MD5</option>
+        <option value="sha1">SHA-1</option>
+        <option value="sha256">SHA-256</option>
+      </select>
+    </div>
+
+    <!-- STRATEGIE -->
+    <div class="form-control mb-4">
+      <label class="label">
+        <span class="label-text">Stratégie</span>
+      </label>
+      <select id="strategy" class="select select-bordered" onchange="onStrategyChange()">
+        <option value="dictionary">Dictionary</option>
+        <option value="bruteforce">Bruteforce</option>
+        <option value="hybrid">Hybrid</option>
+      </select>
+    </div>
+
+    <!-- OPTIONS POUR DICTIONARY / HYBRID -->
+    <div id="options-dictionary" class="mb-4">
+      <div class="form-control">
+        <label class="label">
+          <span class="label-text">Wordlist (fichier dictionnaire)</span>
+        </label>
+        <input id="wordlist" class="input input-bordered" value="dico.txt" />
+        <label class="label">
+          <span class="label-text-alt">Fichier sur le serveur, ex : dico.txt</span>
+        </label>
+      </div>
+    </div>
+
+    <!-- OPTIONS POUR BRUTEFORCE -->
+    <div id="options-bruteforce" class="mb-4 hidden">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div class="form-control">
+          <label class="label">
+            <span class="label-text">Charset</span>
+          </label>
+          <input id="charset" class="input input-bordered" value="0123456789" />
+          <label class="label">
+            <span class="label-text-alt">Ex : 0123456789 ou 0123456789abcdefghijklmnopqrstuvwxyz</span>
+          </label>
+        </div>
+        <div class="form-control">
+          <label class="label">
+            <span class="label-text">Longueur min</span>
+          </label>
+          <input id="min_length" type="number" class="input input-bordered" value="1" min="1" />
+        </div>
+        <div class="form-control">
+          <label class="label">
+            <span class="label-text">Longueur max</span>
+          </label>
+          <input id="max_length" type="number" class="input input-bordered" value="6" min="1" />
+        </div>
+      </div>
+    </div>
+
+    <!-- Options HYBRID complémentaires si tu veux plus tard (mutations, etc.) -->
+
+    <button class="btn btn-primary mt-4" onclick="createJob()">Lancer le job</button>
+    <p id="job-error" class="text-red-500 mt-3"></p>
+  </div>
+
+  <script src="static/js/api.js"></script>
+  <script src="static/js/auth.js"></script>
+  <script src="static/js/jobs.js"></script>
+</body>
+</html>

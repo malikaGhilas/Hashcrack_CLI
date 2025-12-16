@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="fr" data-theme="cupcake">
+<head>
+    <meta charset="UTF-8">
+    <title>HashLab - Connexion</title>
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@4.6.0/dist/full.css" rel="stylesheet" />
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="flex items-center justify-center h-screen bg-base-200">
+    <div class="card w-96 bg-base-100 shadow-xl">
+        <div class="card-body">
+            <h2 class="card-title">Connexion</h2>
+
+            <div class="form-control">
+                <label class="label">Email</label>
+                <input id="email" type="email" class="input input-bordered" />
+            </div>
+
+            <div class="form-control">
+                <label class="label">Mot de passe</label>
+                <input id="password" type="password" class="input input-bordered" />
+            </div>
+
+            <button class="btn btn-primary mt-4" onclick="login()">Se connecter</button>
+
+            <a href="register.html" class="text-sm text-blue-500 mt-2">Créer un compte</a>
+
+            <p id="error" class="text-red-500 mt-2"></p>
+        </div>
+    </div>
+
+<script src="static/js/api.js"></script>
+<script src="static/js/auth.js"></script>
+</body>
+</html>
